@@ -4,7 +4,7 @@ from unittest import TestCase
 from src import config
 from src.day1.main import load_numbers, similarity_score, total_distance
 
-numbers_path = config.BASE_DIR / "day1" / "input.txt"
+numbers_path = config.FIXTURES_DIR / "day1" / "input.txt"
 
 
 class Day1Tests(TestCase):

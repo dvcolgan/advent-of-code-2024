@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.config import BASE_DIR
+from src import config
 
 
 def load_numbers(path: Path) -> tuple[list[int], list[int]]:
@@ -38,14 +38,14 @@ def similarity_score(list1: list[int], list2: list[int]) -> int:
 
 
 def part_1():
-    numbers_path = BASE_DIR / "day1" / "input.txt"
+    numbers_path = config.FIXTURES_DIR / "day1" / "input.txt"
     list1, list2 = load_numbers(numbers_path)
     dist = total_distance(list1, list2)
     print(dist)
 
 
 def part_2():
-    numbers_path = BASE_DIR / "day1" / "input.txt"
+    numbers_path = config.FIXTURES_DIR / "day1" / "input.txt"
     list1, list2 = load_numbers(numbers_path)
     score = similarity_score(list1, list2)
     print(score)
