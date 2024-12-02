@@ -6,6 +6,7 @@ from src.day2.main import (
     is_safe_decreasing,
     is_safe_increasing,
     is_safe_report,
+    is_safe_report_with_dampening,
     load_reports,
 )
 
@@ -68,3 +69,27 @@ class Day2Tests(TestCase):
             self.assertTrue(is_safe_report(safe_report))
         for unsafe_report in test_reports["unsafe"]:
             self.assertFalse(is_safe_report(unsafe_report))
+
+    def test_is_safe_report_with_dampening(self):
+        test_reports = {
+            "safe": [
+                [7, 6, 4, 2, 1],
+                [1, 3, 6, 7, 9],
+                [1, 3, 2, 4, 5],
+                [8, 6, 4, 4, 1],
+            ],
+            "unsafe": [
+                [1, 2, 7, 8, 9],
+                [9, 7, 6, 2, 1],
+            ],
+        }
+
+        for safe_report in test_reports["safe"]:
+            self.assertTrue(is_safe_report_with_dampening(safe_report))
+        for unsafe_report in test_reports["unsafe"]:
+            self.assertFalse(is_safe_report(unsafe_report))
+
+        self.assertTrue(is_safe_report_with_dampening([1, 4, 4, 6, 8]))
+        self.assertTrue(is_safe_report_with_dampening([8, 6, 4, 4, 1]))
+        self.assertTrue(is_safe_report_with_dampening([8, 6, 4, 4, 1]))
+        self.assertTrue(is_safe_report_with_dampening([2, 2, 3, 4, 6]))

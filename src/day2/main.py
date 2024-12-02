@@ -38,24 +38,52 @@ def is_safe_decreasing(report: Report):
 
 
 def is_safe_report(report: Report):
-    if not (is_safe_increasing(report) or is_safe_decreasing(report)):
-        return False
+    if is_safe_increasing(report) or is_safe_decreasing(report):
+        return True
+    return False
 
-    return True
+
+def is_safe_report_with_dampening(report: Report):
+    """
+    For each report, check if the full report is safe.
+    If not, try all combinations of reports without one
+    value included.
+    """
+
+    if is_safe_report(report):
+        return True
+
+    for index_to_exclude in range(len(report)):
+        for index, num in enumerate(report):
+            if index == index_to_exclude:
+                report2 = report.copy()
+                report2.pop(index)
+                if is_safe_report(report2):
+                    return True
+    return False
 
 
-def num_safe_reports(reports: list[Report]) -> int:
+def num_safe_reports(reports: list[Report], with_dampening=False) -> int:
     count: int = 0
     for report in reports:
-        if is_safe_report(report):
+        if is_safe_report(report, with_dampening=with_dampening):
             count += 1
     return count
 
 
 def part_1():
     reports = load_reports(config.FIXTURES_DIR / "day2" / "input.txt")
-    print(num_safe_reports(reports))
+    count: int = 0
+    for report in reports:
+        if is_safe_report(report):
+            count += 1
+    print(count)
 
 
 def part_2():
-    print(0)
+    reports = load_reports(config.FIXTURES_DIR / "day2" / "input.txt")
+    count: int = 0
+    for report in reports:
+        if is_safe_report_with_dampening(report):
+            count += 1
+    print(count)
