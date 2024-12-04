@@ -1,12 +1,8 @@
 from unittest import TestCase
 
 from src import config
-from src.day4.main import (
-    check_direction,
-    find_occurrences,
-    get_cell,
-    parse_board,
-)
+from src.day4.part1 import check_direction, find_occurrences
+from src.day4.util import get_cell, parse_board
 
 input_path = config.FIXTURES_DIR / "day4" / "input.txt"
 
